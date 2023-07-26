@@ -25,6 +25,10 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://meet.jit.si/external_api.js"></script>
 <script type="text/javascript">
+    const btnStartConference = document.getElementById("createMeetingRoom");
+    const btnStartScreen = document.getElementById("shareScreenStart");
+    const btnStopScreen = document.getElementById("shareScreenStop");
+
     let api;
     var domain = "meet.jit.si";
     var options = {
@@ -45,37 +49,65 @@
         api.dispose();
     }
 
-    api = new JitsiMeetExternalAPI(domain, options);
-    // api.executeCommand('toggleShareScreen');
-    $("#createMeetingRoom").click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            success: function (result) {
+    btnStartConference.onclick = () => {
+        try {
+            if (api) {
                 api = new JitsiMeetExternalAPI(domain, options);
-            },
-            error: function (result) {
-                alert('error');
             }
-        });
-    })
+        } catch (e) {
+            throw Error(e);
+        }
+    };
 
-    $("#shareScreenStart").click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            success: function (result) {
+    btnStartScreen.onclick = () => {
+        try {
+            if (api) {
                 api.executeCommand('toggleShareScreen');
-            },
-            error: function (result) {
-                alert('error');
             }
-        });
-    })
-    $("#shareScreenStart").click(function (e) {
-        e.preventDefault();
-        console.log("test button room");
-    })
+        } catch (e) {
+            console.log("start share");
+        }
+    };
+
+    btnStopScreen.onclick = () => {
+        try {
+            if (api) {
+                api.executeCommand('toggleShareScreen');
+            }
+        } catch (e) {
+            console.log("stop share");
+        }
+    }
+    // $("#createMeetingRoom").click(function (e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         type: "POST",
+    //         success: function (result) {
+    //             api = new JitsiMeetExternalAPI(domain, options);
+    //         },
+    //         error: function (result) {
+    //             alert('error');
+    //         }
+    //     });
+    // })
+
+    // $("#shareScreenStart").click(function (e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         type: "POST",
+    //         success: function (result) {
+    //             api.executeCommand('toggleShareScreen');
+    //         },
+    //         error: function (result) {
+    //             alert('error');
+    //         }
+    //     });
+    // })
+
+    // $("#shareScreenStop").click(function (e) {
+    //     e.preventDefault();
+    //     console.log("test button room");
+    // })
 </script>
 
 </html>
