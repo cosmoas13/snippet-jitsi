@@ -50,33 +50,18 @@
     }
 
     btnStartConference.onclick = () => {
-        try {
-            if (api) {
-                api = new JitsiMeetExternalAPI(domain, options);
-            }
-        } catch (e) {
-            throw Error(e);
-        }
+        console.log("test");
+        api = new JitsiMeetExternalAPI(domain, options);
     };
 
     btnStartScreen.onclick = () => {
-        try {
-            if (api) {
-                api.executeCommand('toggleShareScreen');
-            }
-        } catch (e) {
-            console.log("start share");
-        }
+        console.log("start share");
+        api.executeCommand('toggleShareScreen');
     };
 
     btnStopScreen.onclick = () => {
-        try {
-            if (api) {
-                api.executeCommand('toggleShareScreen');
-            }
-        } catch (e) {
-            console.log("stop share");
-        }
+        console.log("stop share");
+        api.executeCommand('toggleShareScreen');
     }
     // $("#createMeetingRoom").click(function (e) {
     //     e.preventDefault();
